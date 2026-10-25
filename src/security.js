@@ -31,6 +31,14 @@ export function checkActivity(action, details = {}) {
   if (action === 'submit' && details.topic && !['html', 'javascript', 'api'].includes(details.topic)) {
     reportIncident('T4', 'Получено направление вне списка.');
   }
+  if (action === 'startup') {
+    const url = new URL(location.href);
+    if (url.searchParams.getAll('staff').includes('1')) {
+      url.searchParams.delete('staff', '1');
+      history.replaceState(history.state, '', url);
+      reportIncident('T6', 'Обнаружен параметр staff=1.');
+    }
+  }
 }
 
 // Приложение вызывает эту функцию перед отправкой и обновлением списка.
