@@ -28,6 +28,9 @@ export function reportIncident(type, reason) {
 export function checkActivity(action, details = {}) {
   if (action === 'decoy') reportIncident('T3', 'Вызвана скрытая кнопка staff-export.');
   if (action === 'submit' && details.supportCode) reportIncident('T2', 'Заполнено скрытое поле supportCode.');
+  if (action === 'submit' && details.topic && !['html', 'javascript', 'api'].includes(details.topic)) {
+    reportIncident('T4', 'Получено направление вне списка.');
+  }
 }
 
 // Приложение вызывает эту функцию перед отправкой и обновлением списка.
