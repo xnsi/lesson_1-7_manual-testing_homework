@@ -26,6 +26,7 @@ export function reportIncident(type, reason) {
 
 // События: startup, refresh, submit, decoy. Условия ловушек добавьте здесь.
 export function checkActivity(action, details = {}) {
+  if (action === 'decoy') reportIncident('T3', 'Вызвана скрытая кнопка staff-export.');
 }
 
 // Приложение вызывает эту функцию перед отправкой и обновлением списка.
